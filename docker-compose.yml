@@ -16,7 +16,7 @@ services:
 
   backend:
     build:
-      context: ./backend
+      context: ./backend/src
       dockerfile: Dockerfile
     ports:
       - "5000:5000"  # Expose the Flask app on port 5000

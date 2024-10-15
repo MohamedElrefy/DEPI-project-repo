@@ -3,7 +3,7 @@ version: '3.8'
 services:
   frontend:
     build:
-      context: ./frontend
+      context: ./react-frontend
       dockerfile: Dockerfile
     ports:
       - "3000:3000"  # Expose the React app on port 3000

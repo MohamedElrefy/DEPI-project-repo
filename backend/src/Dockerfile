@@ -1,20 +1,21 @@
-# Use the official Python image from the Docker Hub
-FROM python:3.12-slim
+FROM python:3.10-alpine3.20
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy the requirements file and install dependencies
-COPY requirements.txt .
+RUN apk add --no-cache gcc musl-dev libffi-dev openssl-dev python3-dev make libgcc libstdc++ && \
+    apk add --no-cache linux-headers
 
-# Install the dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt /app/
 
-# Copy the rest of the application code to the container
-COPY . .
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
-# Expose the port that the FastAPI app runs on
+COPY . /app/
+
+ARG OPENAI_API_KEY
+
+ENV OPENAI_API_KEY=${OPENAI_API_KEY}
+
 EXPOSE 8000
 
-# Command to run the FastAPI application
-CMD ["uvicorn", "your_filename:app", "--host", "0.0.0.0", "--port", "8000"]
+ENTRYPOINT ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

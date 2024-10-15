@@ -5,9 +5,9 @@ import ListItem from '@mui/material/ListItem';
 const item = {
   py: '2px',
   px: 3,
-  color: 'rgba(255, 255, 255, 0.7)',
+  color: 'rgba(186, 85, 211, 0.7)', // Soft purple
   '&:hover, &:focus': {
-    bgcolor: 'rgba(255, 255, 255, 0.08)',
+    bgcolor: 'rgba(186, 85, 211, 0.2)', // Lighter purple on hover/focus
   },
 };
 

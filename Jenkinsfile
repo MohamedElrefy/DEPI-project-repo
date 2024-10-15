@@ -7,7 +7,7 @@ pipeline {
                     script {
                          // Build Docker image
                         sh 'docker build -t project-front:latest .'
-                        sh 'docker tag projectapp:latest'
+                        sh 'docker tag projecta-front:latest'
                         sh 'login -u $USERNAME -p $PASSWORD'
                         sh 'docker push mohamedelrefy20/project-app:latest'
                     }
@@ -19,7 +19,7 @@ pipeline {
                     script {
                          // Build Docker image
                         sh 'docker build -t project-back:latest .'
-                        sh 'docker tag projectapp:latest'
+                        sh 'docker tag project-back:latest'
                         sh 'login -u $USERNAME -p $PASSWORD'
                         sh 'docker push mohamedelrefy20/project-app:latest'
                     }
@@ -37,18 +37,17 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    ansiblePlaybook playbook: './playbook.yml', 
-                                inventory: './inventory.ini'
+                    sh'docker-compose up'
                 }
             }
         }
     }
     post {
         success {
-            echo 'Pipeline succeeded!'
+            slackSend(channel: '#build-notifications', message: "Build #${env.BUILD_NUMBER} - Success: ${env.BUILD_URL}")
         }
         failure {
-            echo 'Pipeline failed!'
+            slackSend(channel: '#build-notifications', message: "Build #${env.BUILD_NUMBER} - Failed: ${env.BUILD_URL}")
         }
     }
 }

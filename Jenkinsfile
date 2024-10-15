@@ -26,10 +26,7 @@ pipeline {
                         // Tag the image
                         sh 'docker tag project-back:latest mohamedelrefy20/project-back:latest'
                         // Login to Docker Hub
-                        sh 'docker login -u $USERNAME -p $PASSWORD'
-                        // Push the image to Docker Hub
-                        sh 'docker push mohamedelrefy20/project-back:latest'
-                    }
+                       
                 }
             }
         }

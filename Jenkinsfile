@@ -7,12 +7,7 @@ pipeline {
                     script {
                         // Build Docker image
                         sh 'docker build -t project-front:latest .'
-                        // Tag the image
-                        sh 'docker tag project-front:latest mohamedelrefy20/project-front:latest'
-                        // Login to Docker Hub
-                        sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
-                        // Push the image to Docker Hub
-                        sh 'docker push mohamedelrefy20/project-front:latest'
+                        
                     }
                 }
             }
@@ -24,8 +19,7 @@ pipeline {
                         // Build Docker image
                         sh 'docker build -t project-back:latest .'
                         // Tag the image
-                        sh 'docker tag project-back:latest mohamedelrefy20/project-back:latest'
-                        // Login to Docker Hub
+                      
                         
                     }
                 }

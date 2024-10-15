@@ -1,0 +1,5 @@
+[jenkins_hosts]
+jenkins ansible_host=127.0.0.1 ansible_port=22 root=your_user ansible_connection=ssh
+
+[jenkins_hosts:vars]
+ansible_python_interpreter=/usr/bin/python3

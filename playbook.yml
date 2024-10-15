@@ -1,0 +1,55 @@
+---
+  - name: Set up Docker and Jenkins Environment
+    hosts: jenkins_hosts  # Use the group name from your inventory
+    become: yes  # Use sudo to install packages
+    tasks:
+      - name: Install OpenSSH Server
+        apt:
+          name: openssh-server
+          state: present
+          update_cache: yes
+  
+      - name: Ensure SSH service is running
+        service:
+          name: ssh
+          state: started
+          enabled: yes
+  
+      - name: Install required packages
+        apt:
+          name:
+            - docker.io
+            - python3
+            - python3-pip
+            - git
+          state: present
+          update_cache: yes
+  
+      - name: Install docker-compose
+        pip:
+          name: docker-compose
+          state: latest
+  
+      - name: Ensure Docker service is running
+        service:
+          name: docker
+          state: started
+          enabled: yes
+  
+      - name: Add Jenkins user to the Docker group
+        user:
+          name: jenkins
+          groups: docker
+          append: yes
+  
+      - name: Start Docker Compose services
+        command: >
+          docker-compose up -d
+        args:
+          chdir: "{{ playbook_dir }}"  # Ensure it runs in the playbook directory
+        register: compose_output
+  
+      - name: Show Docker Compose output
+        debug:
+          var: compose_output.stdout
+  

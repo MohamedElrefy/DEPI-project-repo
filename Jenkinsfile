@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Build back-end dockerfile') {
             steps {
-                dir('backend') {
+                dir('backend/src') {
                     script {
                         // Build Docker image
                         sh 'docker build -t project-back:latest .'

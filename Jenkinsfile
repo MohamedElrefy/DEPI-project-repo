@@ -25,19 +25,14 @@ pipeline {
                 }
             }
         }
-        stage('Install Dependencies') {
-            steps {
-                sh 'pip install flaml[automl]'
-            }
-        }
+    
         
         stage('Deploy') {
             steps {
                 script {
                     // Deploy using docker-compose
                     sh 'docker-compose up --build'
-                    sh 'docker --version'
-                    sh 'date'
+                    
                 }
             }
         }

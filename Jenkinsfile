@@ -26,7 +26,8 @@ pipeline {
                         // Tag the image
                         sh 'docker tag project-back:latest mohamedelrefy20/project-back:latest'
                         // Login to Docker Hub
-                       
+                        
+                    }
                 }
             }
         }

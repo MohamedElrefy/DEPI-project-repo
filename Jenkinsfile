@@ -44,10 +44,10 @@ pipeline {
     }
     post {
         success {
-            slackSend(channel: '#build-notifications', message: "Build #${env.BUILD_NUMBER} - Success: ${env.BUILD_URL}")
+            slackSend(channel: '#jenkins', message: "Build #${env.BUILD_NUMBER} - Success: ${env.BUILD_URL}")
         }
         failure {
-            slackSend(channel: '#build-notifications', message: "Build #${env.BUILD_NUMBER} - Failed: ${env.BUILD_URL}")
+            slackSend(channel: '#jenkins', message: "Build #${env.BUILD_NUMBER} - Failed: ${env.BUILD_URL}")
         }
     }
 }

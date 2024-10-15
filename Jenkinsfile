@@ -31,6 +31,7 @@ pipeline {
                 script {
                     // Deploy using docker-compose
                     sh 'docker-compose up -d'
+                    sh 'docker --version'
                 }
             }
         }

@@ -25,6 +25,11 @@ pipeline {
                 }
             }
         }
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip install flaml[automl]'
+            }
+        }
         
         stage('Deploy') {
             steps {

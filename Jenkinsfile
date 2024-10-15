@@ -30,8 +30,9 @@ pipeline {
             steps {
                 script {
                     // Deploy using docker-compose
-                    sh 'docker-compose up -d'
+                    sh 'docker-compose up --build'
                     sh 'docker --version'
+                    sh 'date'
                 }
             }
         }

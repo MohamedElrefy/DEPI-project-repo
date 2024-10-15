@@ -3,41 +3,50 @@ pipeline {
     stages {
         stage('Build front-end dockerfile') {
             steps {
-                dir('react-frontend')
+                dir('react-frontend') {
                     script {
-                         // Build Docker image
+                        // Build Docker image
                         sh 'docker build -t project-front:latest .'
-                        sh 'docker tag projecta-front:latest'
-                        sh 'login -u $USERNAME -p $PASSWORD'
-                        sh 'docker push mohamedelrefy20/project-app:latest'
+                        // Tag the image
+                        sh 'docker tag project-front:latest mohamedelrefy20/project-front:latest'
+                        // Login to Docker Hub
+                        sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
+                        // Push the image to Docker Hub
+                        sh 'docker push mohamedelrefy20/project-front:latest'
                     }
                 }
+            }
         }
         stage('Build back-end dockerfile') {
             steps {
-                dir('frontend')
+                dir('backend') {
                     script {
-                         // Build Docker image
+                        // Build Docker image
                         sh 'docker build -t project-back:latest .'
-                        sh 'docker tag project-back:latest'
-                        sh 'login -u $USERNAME -p $PASSWORD'
-                        sh 'docker push mohamedelrefy20/project-app:latest'
+                        // Tag the image
+                        sh 'docker tag project-back:latest mohamedelrefy20/project-back:latest'
+                        // Login to Docker Hub
+                        sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
+                        // Push the image to Docker Hub
+                        sh 'docker push mohamedelrefy20/project-back:latest'
                     }
                 }
+            }
         }
         stage('Test') {
             steps {
                 script {
                     // Run tests (customize as needed)
-                    sh 'docker run project-front:latest --name front ./run_tests.sh'
-                    sh 'docker run project-back:latest  --name back ./run_tests.sh'
+                    sh 'docker run --rm project-front:latest ./run_tests.sh'
+                    sh 'docker run --rm project-back:latest ./run_tests.sh'
                 }
             }
         }
         stage('Deploy') {
             steps {
                 script {
-                    sh'docker-compose up'
+                    // Deploy using docker-compose
+                    sh 'docker-compose up -d'
                 }
             }
         }

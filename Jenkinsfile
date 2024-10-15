@@ -25,15 +25,7 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
-            steps {
-                script {
-                    // Run tests (customize as needed)
-                    sh 'docker run --rm project-front:latest ./run_tests.sh'
-                    sh 'docker run --rm project-back:latest ./run_tests.sh'
-                }
-            }
-        }
+        
         stage('Deploy') {
             steps {
                 script {

@@ -43,7 +43,7 @@ pipeline {
             steps {
                 script {
                     // Deploy using docker-compose
-                    sh 'ansible-playbook playbook.yml -i inventory.ini'
+                    sh 'docker-compose up --build -d'
                     
                 }
             }

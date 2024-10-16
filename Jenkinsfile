@@ -5,8 +5,13 @@ pipeline {
             steps {
                 dir('react-frontend') {
                     script {
-                        // Build Docker image
-                        sh 'docker build -t project-front:latest .'
+                        withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                    sh """
+                    docker build -t mohamedelrefy20/frontend:latest .
+                    docker login -u ${USERNAME} -p ${PASSWORD}
+                    docker push mohamedelrefy20/frontend:latest
+                    """
+                }
                         
                     }
                 }
@@ -17,8 +22,15 @@ pipeline {
                 dir('backend/src') {
                     script {
                         // Build Docker image
-                        sh 'docker build -t project-back:latest .'
-                        // Tag the image
+                        ithCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                    sh """
+                    docker build -t mohamedelrefy20/backend:latest .
+                    docker login -u ${USERNAME} -p ${PASSWORD}
+                    docker push mohamedelrefy20/backend:latest
+                    """
+
+                         
+
                       
                         
                     }

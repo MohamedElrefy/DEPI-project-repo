@@ -3,18 +3,6 @@
     hosts: jenkins_hosts  # Use the group name from your inventory
     become: yes  # Use sudo to install packages
     tasks:
-      - name: Install OpenSSH Server
-        apt:
-          name: openssh-server
-          state: present
-          update_cache: yes
-  
-      - name: Ensure SSH service is running
-        service:
-          name: ssh
-          state: started
-          enabled: yes
-  
       - name: Install required packages
         apt:
           name:

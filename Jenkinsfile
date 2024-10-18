@@ -37,7 +37,10 @@ pipeline {
             steps {
                 script {
                     // Ensure docker-compose.yml is configured to use the new images
-                    sh 'docker-compose up --build -d'
+                   
+                    sh 'kubectl apply -f namespace.yaml'
+                    sh 'kubectl apply -f frontend-deployment.yaml'
+                    sh 'kubectl apply -f backend-deployment.yaml'
                 }
             }
         }

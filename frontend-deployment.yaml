@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: your-frontend-image:latest  # Replace with your frontend image
+          image: mohamedelrefy20/frontend # Replace with your frontend image
           ports:
             - containerPort: 3000
           env:

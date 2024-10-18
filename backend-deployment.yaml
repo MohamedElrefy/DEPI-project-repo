@@ -19,3 +19,17 @@ spec:
         ports:
         - containerPort: 5000
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: my-app  # Use the namespace if created
+spec:
+  type: NodePort  # Change to NodePort
+  ports:
+  - port: 5000
+    targetPort: 5000
+    protocol: TCP
+    nodePort: 30001  # Optional: Specify a nodePort or let Kubernetes assign one
+  selector:
+    app: backend

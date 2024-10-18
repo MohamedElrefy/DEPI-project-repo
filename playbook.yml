@@ -17,7 +17,7 @@
             - openjdk-11-jdk  # Install OpenJDK 11
             - docker.io
             - git #git install
-            - curl
+            - curl #curl added
             - docker-compose
             - python3-pip  # Optional, for any Python-based tasks
           state: present

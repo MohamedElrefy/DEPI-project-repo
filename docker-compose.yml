@@ -19,7 +19,7 @@ services:
       context: ./backend/src
       dockerfile: Dockerfile
     environment:
-      - OPENAI_API_KEY=${OPENAI_API_KEY}  
+      - OPENAI_API_KEY=${OPENAI_API_KEY}  ##
     volumes:
       - .:/app   
     ports:

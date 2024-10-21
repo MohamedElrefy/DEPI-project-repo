@@ -41,6 +41,8 @@ pipeline {
                     sh 'kubectl apply -f namespace.yaml'
                     sh 'kubectl apply -f frontend-deployment.yaml'
                     sh 'kubectl apply -f backend-deployment.yaml'
+                    sh 'kubectl apply -f network-policy.yaml'
+                    sh 'kubectl apply -f secret.yaml'
                 }
             }
         }

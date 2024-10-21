@@ -18,11 +18,18 @@ spec:
         image: mohamedelrefy20/backend  # Replace with your backend image or build it
         ports:
         - containerPort: 5000
+        env:
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: openai-api-secret
+              key: OPENAI_API_KEY
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: backend
+  namespace: my-app
 spec:
   type: ClusterIP
   ports:

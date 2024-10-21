@@ -7,8 +7,7 @@ RUN apk add --no-cache gcc musl-dev libffi-dev openssl-dev python3-dev make libg
 
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 COPY . .
 

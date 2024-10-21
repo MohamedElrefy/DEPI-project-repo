@@ -43,7 +43,7 @@ pipeline {
                     sh 'kubectl apply -f backend-deployment.yaml'
                     sh 'kubectl apply -f network-policy.yaml'
                     sh 'kubectl apply -f secret.yaml'
-                    sh 'docker-compose up -d --build'
+                    sh 'docker-compose up --build'
                 }
             }
         }

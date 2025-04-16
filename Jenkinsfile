@@ -36,14 +36,14 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Ensure docker-compose.yml is configured to use the new images
+                   
                    
                     sh 'kubectl apply -f namespace.yaml'
                     sh 'kubectl apply -f frontend-deployment.yaml'
                     sh 'kubectl apply -f backend-deployment.yaml'
                     sh 'kubectl apply -f network-policy.yaml'
                     sh 'kubectl apply -f secret.yaml'
-                    sh 'docker-compose up --build'
+                    
                 }
             }
         }
